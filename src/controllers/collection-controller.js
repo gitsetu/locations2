@@ -26,7 +26,7 @@ export const collectionController = {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newPlace = {
         title: request.payload.title,
-        artist: request.payload.artist,
+        category: request.payload.category,
         duration: Number(request.payload.duration),
       };
       await db.placeStore.addPlace(collection._id, newPlace);

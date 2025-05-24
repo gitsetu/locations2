@@ -44,7 +44,7 @@ export const placeJsonStore = {
 
   async updatePlace(place, updatedPlace) {
     place.title = updatedPlace.title;
-    place.artist = updatedPlace.artist;
+    place.category = updatedPlace.category;
     place.duration = updatedPlace.duration;
     await db.write();
   },

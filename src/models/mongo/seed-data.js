@@ -31,19 +31,19 @@ export const seedData = {
     _model : "Place",
     place_1 : {
       title: "Violin Concerto No. 1",
-      artist: "Mozart",
+      category: "Mozart",
       duration: 15,
       collectionid: "->collections.mozart"
     },
     place_2 : {
       title: "Violin Concerto No. 2",
-      artist: "Mozart",
+      category: "Mozart",
       duration: 11,
       collectionid: "->collections.mozart"
     },
     place_3 : {
       title: "Violin Concerto No. 3",
-      artist: "Mozart",
+      category: "Mozart",
       duration: 23,
       collectionid: "->collections.mozart"
     }

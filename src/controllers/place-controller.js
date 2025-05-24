@@ -27,7 +27,7 @@ export const placeController = {
       const place = await db.placeStore.getPlaceById(request.params.placeid);
       const newPlace = {
         title: request.payload.title,
-        artist: request.payload.artist,
+        category: request.payload.category,
         duration: Number(request.payload.duration),
       };
       await db.placeStore.updatePlace(place, newPlace);

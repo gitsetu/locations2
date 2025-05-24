@@ -4,7 +4,7 @@ const { Schema } = Mongoose;
 
 const placeSchema = new Schema({
   title: String,
-  artist: String,
+  category: String,
   duration: Number,
   collectionid: {
     type: Schema.Types.ObjectId,

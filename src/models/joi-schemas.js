@@ -24,7 +24,7 @@ export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 export const PlaceSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Piano Sonata No. 7"),
-    artist: Joi.string().required().example("Beethoven"),
+    category: Joi.string().required().example("Beethoven"),
     duration: Joi.number().allow("").optional().example(12),
     collectionid: IdSpec,
   })

@@ -39,7 +39,7 @@ export const mozart = {
 
 export const concerto = {
   title: "Violin Concerto No. 3",
-  artist: "Mozart",
+  category: "Mozart",
   duration: 15,
 };
 
@@ -62,17 +62,17 @@ export const testCollections = [
 export const testPlaces = [
   {
     title: "Piano Sonata No. 3",
-    artist: "Beethoven",
+    category: "Beethoven",
     duration: 5,
   },
   {
     title: "Piano Sonata No. 7",
-    artist: "Beethoven",
+    category: "Beethoven",
     duration: 6,
   },
   {
     title: "Piano Sonata No. 10",
-    artist: "Beethoven",
+    category: "Beethoven",
     duration: 4,
   },
 ];
