@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
-import { playtimeService } from "./playtime-service.js";
+import { appService } from "./app-service.js";
 import { maggie, mozart, maggieCredentials, testPlaylists, testTracks, concerto } from "../fixtures.js";
 
 suite("Track API tests", () => {
@@ -8,35 +8,35 @@ suite("Track API tests", () => {
   let beethovenSonatas = null;
 
   setup(async () => {
-    playtimeService.clearAuth();
-    user = await playtimeService.createUser(maggie);
-    await playtimeService.authenticate(maggieCredentials);
-    await playtimeService.deleteAllPlaylists();
-    await playtimeService.deleteAllTracks();
-    await playtimeService.deleteAllUsers();
-    user = await playtimeService.createUser(maggie);
-    await playtimeService.authenticate(maggieCredentials);
+    appService.clearAuth();
+    user = await appService.createUser(maggie);
+    await appService.authenticate(maggieCredentials);
+    await appService.deleteAllPlaylists();
+    await appService.deleteAllTracks();
+    await appService.deleteAllUsers();
+    user = await appService.createUser(maggie);
+    await appService.authenticate(maggieCredentials);
     mozart.userid = user._id;
-    beethovenSonatas = await playtimeService.createPlaylist(mozart);
+    beethovenSonatas = await appService.createPlaylist(mozart);
   });
 
   teardown(async () => {});
 
   test("create track", async () => {
-    const returnedTrack = await playtimeService.createTrack(beethovenSonatas._id, concerto);
+    const returnedTrack = await appService.createTrack(beethovenSonatas._id, concerto);
     assertSubset(concerto, returnedTrack);
   });
 
   test("create Multiple tracks", async () => {
     for (let i = 0; i < testTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
     }
-    const returnedTracks = await playtimeService.getAllTracks();
+    const returnedTracks = await appService.getAllTracks();
     assert.equal(returnedTracks.length, testTracks.length);
     for (let i = 0; i < returnedTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const track = await playtimeService.getTrack(returnedTracks[i]._id);
+      const track = await appService.getTrack(returnedTracks[i]._id);
       assertSubset(track, returnedTracks[i]);
     }
   });
@@ -44,24 +44,24 @@ suite("Track API tests", () => {
   test("Delete TrackApi", async () => {
     for (let i = 0; i < testTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
     }
-    let returnedTracks = await playtimeService.getAllTracks();
+    let returnedTracks = await appService.getAllTracks();
     assert.equal(returnedTracks.length, testTracks.length);
     for (let i = 0; i < returnedTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const track = await playtimeService.deleteTrack(returnedTracks[i]._id);
+      const track = await appService.deleteTrack(returnedTracks[i]._id);
     }
-    returnedTracks = await playtimeService.getAllTracks();
+    returnedTracks = await appService.getAllTracks();
     assert.equal(returnedTracks.length, 0);
   });
 
   test("denormalised playlist", async () => {
     for (let i = 0; i < testTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
     }
-    const returnedPlaylist = await playtimeService.getPlaylist(beethovenSonatas._id);
+    const returnedPlaylist = await appService.getPlaylist(beethovenSonatas._id);
     assert.equal(returnedPlaylist.tracks.length, testTracks.length);
     for (let i = 0; i < testTracks.length; i += 1) {
       assertSubset(testTracks[i], returnedPlaylist.tracks[i]);

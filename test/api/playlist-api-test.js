@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import { assert } from "chai";
-import { playtimeService } from "./playtime-service.js";
+import { appService } from "./app-service.js";
 import { assertSubset } from "../test-utils.js";
 import { maggie, maggieCredentials, mozart, testPlaylists } from "../fixtures.js";
 
@@ -10,30 +10,30 @@ suite("Playlist API tests", () => {
   let user = null;
 
   setup(async () => {
-    playtimeService.clearAuth();
-    user = await playtimeService.createUser(maggie);
-    await playtimeService.authenticate(maggieCredentials);
-    await playtimeService.deleteAllPlaylists();
-    await playtimeService.deleteAllUsers();
-    user = await playtimeService.createUser(maggie);
-    await playtimeService.authenticate(maggieCredentials);
+    appService.clearAuth();
+    user = await appService.createUser(maggie);
+    await appService.authenticate(maggieCredentials);
+    await appService.deleteAllPlaylists();
+    await appService.deleteAllUsers();
+    user = await appService.createUser(maggie);
+    await appService.authenticate(maggieCredentials);
     mozart.userid = user._id;
   });
 
   teardown(async () => {});
 
   test("create playlist", async () => {
-    const returnedPlaylist = await playtimeService.createPlaylist(mozart);
+    const returnedPlaylist = await appService.createPlaylist(mozart);
     assert.isNotNull(returnedPlaylist);
     assertSubset(mozart, returnedPlaylist);
   });
 
   test("delete a playlist", async () => {
-    const playlist = await playtimeService.createPlaylist(mozart);
-    const response = await playtimeService.deletePlaylist(playlist._id);
+    const playlist = await appService.createPlaylist(mozart);
+    const response = await appService.deletePlaylist(playlist._id);
     assert.equal(response.status, 204);
     try {
-      const returnedPlaylist = await playtimeService.getPlaylist(playlist.id);
+      const returnedPlaylist = await appService.getPlaylist(playlist.id);
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No Playlist with this id", "Incorrect Response Message");
@@ -44,18 +44,18 @@ suite("Playlist API tests", () => {
     for (let i = 0; i < testPlaylists.length; i += 1) {
       testPlaylists[i].userid = user._id;
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createPlaylist(testPlaylists[i]);
+      await appService.createPlaylist(testPlaylists[i]);
     }
-    let returnedLists = await playtimeService.getAllPlaylists();
+    let returnedLists = await appService.getAllPlaylists();
     assert.equal(returnedLists.length, testPlaylists.length);
-    await playtimeService.deleteAllPlaylists();
-    returnedLists = await playtimeService.getAllPlaylists();
+    await appService.deleteAllPlaylists();
+    returnedLists = await appService.getAllPlaylists();
     assert.equal(returnedLists.length, 0);
   });
 
   test("remove non-existant playlist", async () => {
     try {
-      const response = await playtimeService.deletePlaylist("not an id");
+      const response = await appService.deletePlaylist("not an id");
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No Playlist with this id", "Incorrect Response Message");
