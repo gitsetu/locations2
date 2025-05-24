@@ -46,6 +46,6 @@ export const placeMemStore = {
   async updatePlace(place, updatedPlace) {
     place.title = updatedPlace.title;
     place.category = updatedPlace.category;
-    place.duration = updatedPlace.duration;
+    place.latitude = updatedPlace.latitude;
   },
 };

@@ -32,19 +32,19 @@ export const seedData = {
     place_1 : {
       title: "Violin Concerto No. 1",
       category: "Mozart",
-      duration: 15,
+      latitude: 15,
       collectionid: "->collections.mozart"
     },
     place_2 : {
       title: "Violin Concerto No. 2",
       category: "Mozart",
-      duration: 11,
+      latitude: 11,
       collectionid: "->collections.mozart"
     },
     place_3 : {
       title: "Violin Concerto No. 3",
       category: "Mozart",
-      duration: 23,
+      latitude: 23,
       collectionid: "->collections.mozart"
     }
   }

@@ -40,7 +40,7 @@ export const mozart = {
 export const concerto = {
   title: "Violin Concerto No. 3",
   category: "Mozart",
-  duration: 15,
+  latitude: 15,
 };
 
 export const beethoven = {
@@ -63,16 +63,16 @@ export const testPlaces = [
   {
     title: "Piano Sonata No. 3",
     category: "Beethoven",
-    duration: 5,
+    latitude: 5,
   },
   {
     title: "Piano Sonata No. 7",
     category: "Beethoven",
-    duration: 6,
+    latitude: 6,
   },
   {
     title: "Piano Sonata No. 10",
     category: "Beethoven",
-    duration: 4,
+    latitude: 4,
   },
 ];

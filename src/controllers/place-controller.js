@@ -28,7 +28,7 @@ export const placeController = {
       const newPlace = {
         title: request.payload.title,
         category: request.payload.category,
-        duration: Number(request.payload.duration),
+        latitude: Number(request.payload.latitude),
       };
       await db.placeStore.updatePlace(place, newPlace);
       return h.redirect(`/collection/${request.params.id}`);
