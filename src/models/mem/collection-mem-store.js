@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { trackMemStore } from "./track-mem-store.js";
+import { placeMemStore } from "./place-mem-store.js";
 
 let collections = [];
 
@@ -17,7 +17,7 @@ export const collectionMemStore = {
   async getCollectionById(id) {
     const list = collections.find((collection) => collection._id === id);
     if (list) {
-      list.tracks = await trackMemStore.getTracksByCollectionId(list._id);
+      list.places = await placeMemStore.getPlacesByCollectionId(list._id);
       return list;
     }
     return null;

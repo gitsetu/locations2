@@ -27,21 +27,21 @@ export const seedData = {
       userid: "->users.bart"
     }
   },
-  tracks: {
-    _model : "Track",
-    track_1 : {
+  places: {
+    _model : "Place",
+    place_1 : {
       title: "Violin Concerto No. 1",
       artist: "Mozart",
       duration: 15,
       collectionid: "->collections.mozart"
     },
-    track_2 : {
+    place_2 : {
       title: "Violin Concerto No. 2",
       artist: "Mozart",
       duration: 11,
       collectionid: "->collections.mozart"
     },
-    track_3 : {
+    place_3 : {
       title: "Violin Concerto No. 3",
       artist: "Mozart",
       duration: 23,

@@ -1,5 +1,5 @@
 import { Collection } from "./collection.js";
-import { trackMongoStore } from "./track-mongo-store.js";
+import { placeMongoStore } from "./place-mongo-store.js";
 
 export const collectionMongoStore = {
   async getAllCollections() {
@@ -11,7 +11,7 @@ export const collectionMongoStore = {
     if (id) {
       const collection = await Collection.findOne({ _id: id }).lean();
       if (collection) {
-        collection.tracks = await trackMongoStore.getTracksByCollectionId(collection._id);
+        collection.places = await placeMongoStore.getPlacesByCollectionId(collection._id);
       }
       return collection;
     }

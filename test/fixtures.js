@@ -59,7 +59,7 @@ export const testCollections = [
   },
 ];
 
-export const testTracks = [
+export const testPlaces = [
   {
     title: "Piano Sonata No. 3",
     artist: "Beethoven",

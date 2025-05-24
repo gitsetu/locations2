@@ -1,9 +1,9 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { appService } from "./app-service.js";
-import { maggie, mozart, maggieCredentials, testCollections, testTracks, concerto } from "../fixtures.js";
+import { maggie, mozart, maggieCredentials, testCollections, testPlaces, concerto } from "../fixtures.js";
 
-suite("Track API tests", () => {
+suite("Place API tests", () => {
   let user = null;
   let beethovenSonatas = null;
 
@@ -12,7 +12,7 @@ suite("Track API tests", () => {
     user = await appService.createUser(maggie);
     await appService.authenticate(maggieCredentials);
     await appService.deleteAllCollections();
-    await appService.deleteAllTracks();
+    await appService.deleteAllPlaces();
     await appService.deleteAllUsers();
     user = await appService.createUser(maggie);
     await appService.authenticate(maggieCredentials);
@@ -22,49 +22,49 @@ suite("Track API tests", () => {
 
   teardown(async () => {});
 
-  test("create track", async () => {
-    const returnedTrack = await appService.createTrack(beethovenSonatas._id, concerto);
-    assertSubset(concerto, returnedTrack);
+  test("create place", async () => {
+    const returnedPlace = await appService.createPlace(beethovenSonatas._id, concerto);
+    assertSubset(concerto, returnedPlace);
   });
 
-  test("create Multiple tracks", async () => {
-    for (let i = 0; i < testTracks.length; i += 1) {
+  test("create Multiple places", async () => {
+    for (let i = 0; i < testPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createPlace(beethovenSonatas._id, testPlaces[i]);
     }
-    const returnedTracks = await appService.getAllTracks();
-    assert.equal(returnedTracks.length, testTracks.length);
-    for (let i = 0; i < returnedTracks.length; i += 1) {
+    const returnedPlaces = await appService.getAllPlaces();
+    assert.equal(returnedPlaces.length, testPlaces.length);
+    for (let i = 0; i < returnedPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const track = await appService.getTrack(returnedTracks[i]._id);
-      assertSubset(track, returnedTracks[i]);
+      const place = await appService.getPlace(returnedPlaces[i]._id);
+      assertSubset(place, returnedPlaces[i]);
     }
   });
 
-  test("Delete TrackApi", async () => {
-    for (let i = 0; i < testTracks.length; i += 1) {
+  test("Delete PlaceApi", async () => {
+    for (let i = 0; i < testPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createPlace(beethovenSonatas._id, testPlaces[i]);
     }
-    let returnedTracks = await appService.getAllTracks();
-    assert.equal(returnedTracks.length, testTracks.length);
-    for (let i = 0; i < returnedTracks.length; i += 1) {
+    let returnedPlaces = await appService.getAllPlaces();
+    assert.equal(returnedPlaces.length, testPlaces.length);
+    for (let i = 0; i < returnedPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const track = await appService.deleteTrack(returnedTracks[i]._id);
+      const place = await appService.deletePlace(returnedPlaces[i]._id);
     }
-    returnedTracks = await appService.getAllTracks();
-    assert.equal(returnedTracks.length, 0);
+    returnedPlaces = await appService.getAllPlaces();
+    assert.equal(returnedPlaces.length, 0);
   });
 
   test("denormalised collection", async () => {
-    for (let i = 0; i < testTracks.length; i += 1) {
+    for (let i = 0; i < testPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await appService.createTrack(beethovenSonatas._id, testTracks[i]);
+      await appService.createPlace(beethovenSonatas._id, testPlaces[i]);
     }
     const returnedCollection = await appService.getCollection(beethovenSonatas._id);
-    assert.equal(returnedCollection.tracks.length, testTracks.length);
-    for (let i = 0; i < testTracks.length; i += 1) {
-      assertSubset(testTracks[i], returnedCollection.tracks[i]);
+    assert.equal(returnedCollection.places.length, testPlaces.length);
+    for (let i = 0; i < testPlaces.length; i += 1) {
+      assertSubset(testPlaces[i], returnedCollection.places[i]);
     }
   });
 });

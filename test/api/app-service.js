@@ -53,28 +53,28 @@ export const appService = {
     return res.data;
   },
 
-  async getAllTracks() {
-    const res = await axios.get(`${this.appUrl}/api/tracks`);
+  async getAllPlaces() {
+    const res = await axios.get(`${this.appUrl}/api/places`);
     return res.data;
   },
 
-  async createTrack(id, track) {
-    const res = await axios.post(`${this.appUrl}/api/collections/${id}/tracks`, track);
+  async createPlace(id, place) {
+    const res = await axios.post(`${this.appUrl}/api/collections/${id}/places`, place);
     return res.data;
   },
 
-  async deleteAllTracks() {
-    const res = await axios.delete(`${this.appUrl}/api/tracks`);
+  async deleteAllPlaces() {
+    const res = await axios.delete(`${this.appUrl}/api/places`);
     return res.data;
   },
 
-  async getTrack(id) {
-    const res = await axios.get(`${this.appUrl}/api/tracks/${id}`);
+  async getPlace(id) {
+    const res = await axios.get(`${this.appUrl}/api/places/${id}`);
     return res.data;
   },
 
-  async deleteTrack(id) {
-    const res = await axios.delete(`${this.appUrl}/api/tracks/${id}`);
+  async deletePlace(id) {
+    const res = await axios.delete(`${this.appUrl}/api/places/${id}`);
     return res.data;
   },
 

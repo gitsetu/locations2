@@ -1,67 +1,67 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testCollections, testTracks, beethoven, mozart, concerto, testUsers } from "../fixtures.js";
+import { testCollections, testPlaces, beethoven, mozart, concerto, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
-suite("Track Model tests", () => {
+suite("Place Model tests", () => {
 
   let beethovenList = null;
 
   setup(async () => {
     db.init("mongo");
     await db.collectionStore.deleteAllCollections();
-    await db.trackStore.deleteAllTracks();
+    await db.placeStore.deleteAllPlaces();
     beethovenList = await db.collectionStore.addCollection(beethoven);
-    for (let i = 0; i < testTracks.length; i += 1) {
+    for (let i = 0; i < testPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testTracks[i] = await db.trackStore.addTrack(beethovenList._id, testTracks[i]);
+      testPlaces[i] = await db.placeStore.addPlace(beethovenList._id, testPlaces[i]);
     }
   });
 
-  test("create single track", async () => {
+  test("create single place", async () => {
     const mozartList = await db.collectionStore.addCollection(mozart);
-    const track = await db.trackStore.addTrack(mozartList._id, concerto)
-    assert.isNotNull(track._id);
-    assertSubset (concerto, track);
+    const place = await db.placeStore.addPlace(mozartList._id, concerto)
+    assert.isNotNull(place._id);
+    assertSubset (concerto, place);
   });
 
-  test("create multiple trackApi", async () => {
-    const tracks = await db.collectionStore.getCollectionById(beethovenList._id);
-    assert.equal(testTracks.length, testTracks.length)
+  test("create multiple placeApi", async () => {
+    const places = await db.collectionStore.getCollectionById(beethovenList._id);
+    assert.equal(testPlaces.length, testPlaces.length)
   });
 
-  test("delete all trackApi", async () => {
-    const tracks = await db.trackStore.getAllTracks();
-    assert.equal(testTracks.length, tracks.length);
-    await db.trackStore.deleteAllTracks();
-    const newTracks = await db.trackStore.getAllTracks();
-    assert.equal(0, newTracks.length);
+  test("delete all placeApi", async () => {
+    const places = await db.placeStore.getAllPlaces();
+    assert.equal(testPlaces.length, places.length);
+    await db.placeStore.deleteAllPlaces();
+    const newPlaces = await db.placeStore.getAllPlaces();
+    assert.equal(0, newPlaces.length);
   });
 
-  test("get a track - success", async () => {
+  test("get a place - success", async () => {
     const mozartList = await db.collectionStore.addCollection(mozart);
-    const track = await db.trackStore.addTrack(mozartList._id, concerto)
-    const newTrack = await db.trackStore.getTrackById(track._id);
-    assertSubset (concerto, newTrack);
+    const place = await db.placeStore.addPlace(mozartList._id, concerto)
+    const newPlace = await db.placeStore.getPlaceById(place._id);
+    assertSubset (concerto, newPlace);
   });
 
-  test("delete One Track - success", async () => {
-    const id = testTracks[0]._id;
-    await db.trackStore.deleteTrack(id);
-    const tracks = await db.trackStore.getAllTracks();
-    assert.equal(tracks.length, testCollections.length - 1);
-    const deletedTrack = await db.trackStore.getTrackById(id);
-    assert.isNull(deletedTrack);
+  test("delete One Place - success", async () => {
+    const id = testPlaces[0]._id;
+    await db.placeStore.deletePlace(id);
+    const places = await db.placeStore.getAllPlaces();
+    assert.equal(places.length, testCollections.length - 1);
+    const deletedPlace = await db.placeStore.getPlaceById(id);
+    assert.isNull(deletedPlace);
   });
 
   test("get a collection - bad params", async () => {
-    assert.isNull(await db.trackStore.getTrackById(""));
-    assert.isNull(await db.trackStore.getTrackById());
+    assert.isNull(await db.placeStore.getPlaceById(""));
+    assert.isNull(await db.placeStore.getPlaceById());
   });
 
   test("delete One User - fail", async () => {
-    await db.trackStore.deleteTrack("bad-id");
-    const tracks = await db.trackStore.getAllTracks();
-    assert.equal(tracks.length, testCollections.length);
+    await db.placeStore.deletePlace("bad-id");
+    const places = await db.placeStore.getAllPlaces();
+    assert.equal(places.length, testCollections.length);
   });
 });

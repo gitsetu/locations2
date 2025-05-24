@@ -1,36 +1,36 @@
-import { TrackSpec } from "../models/joi-schemas.js";
+import { PlaceSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 
-export const trackController = {
+export const placeController = {
   index: {
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
-      const track = await db.trackStore.getTrackById(request.params.trackid);
+      const place = await db.placeStore.getPlaceById(request.params.placeid);
       const viewData = {
         title: "Edit Song",
         collection: collection,
-        track: track,
+        place: place,
       };
-      return h.view("track-view", viewData);
+      return h.view("place-view", viewData);
     },
   },
 
   update: {
     validate: {
-      payload: TrackSpec,
+      payload: PlaceSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("track-view", { title: "Edit track error", errors: error.details }).takeover().code(400);
+        return h.view("place-view", { title: "Edit place error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
-      const track = await db.trackStore.getTrackById(request.params.trackid);
-      const newTrack = {
+      const place = await db.placeStore.getPlaceById(request.params.placeid);
+      const newPlace = {
         title: request.payload.title,
         artist: request.payload.artist,
         duration: Number(request.payload.duration),
       };
-      await db.trackStore.updateTrack(track, newTrack);
+      await db.placeStore.updatePlace(place, newPlace);
       return h.redirect(`/collection/${request.params.id}`);
     },
   },

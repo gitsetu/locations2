@@ -1,0 +1,20 @@
+{{> menu}}
+
+<form class="box"  action="/place/{{collection._id}}/updateplace/{{place._id}}" method="POST">
+  <label>Update Place Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <input class="input" type="text" name="title", value="{{place.title}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text" name="artist" value="{{place.artist}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text"  name="duration" value="{{place.duration}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update Place</button>
+</form>
+

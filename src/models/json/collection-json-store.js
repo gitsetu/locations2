@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import { db } from "./store-utils.js";
-import { trackJsonStore } from "./track-json-store.js";
+import { placeJsonStore } from "./place-json-store.js";
 
 export const collectionJsonStore = {
   async getAllCollections() {
@@ -20,7 +20,7 @@ export const collectionJsonStore = {
     await db.read();
     let list = db.data.collections.find((collection) => collection._id === id);
     if (list) {
-      list.tracks = await trackJsonStore.getTracksByCollectionId(list._id);
+      list.places = await placeJsonStore.getPlacesByCollectionId(list._id);
     } else {
       list = null;
     }

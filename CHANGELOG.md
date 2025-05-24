@@ -68,7 +68,7 @@
 - about controller + view added
 - introduce track model
 - playlist controller + view & partials added
-- support adding trackApi to playlists
+- support adding placeApi to playlists
 - introduce sessions
 - associate playlists with userApi
 

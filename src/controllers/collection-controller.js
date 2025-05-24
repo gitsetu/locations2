@@ -1,4 +1,4 @@
-import { TrackSpec } from "../models/joi-schemas.js";
+import { PlaceSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
@@ -14,30 +14,30 @@ export const collectionController = {
     },
   },
 
-  addTrack: {
+  addPlace: {
     validate: {
-      payload: TrackSpec,
+      payload: PlaceSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("collection-view", { title: "Add track error", errors: error.details }).takeover().code(400);
+        return h.view("collection-view", { title: "Add place error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
-      const newTrack = {
+      const newPlace = {
         title: request.payload.title,
         artist: request.payload.artist,
         duration: Number(request.payload.duration),
       };
-      await db.trackStore.addTrack(collection._id, newTrack);
+      await db.placeStore.addPlace(collection._id, newPlace);
       return h.redirect(`/collection/${collection._id}`);
     },
   },
 
-  deleteTrack: {
+  deletePlace: {
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
-      await db.trackStore.deleteTrack(request.params.trackid);
+      await db.placeStore.deletePlace(request.params.placeid);
       return h.redirect(`/collection/${collection._id}`);
     },
   },

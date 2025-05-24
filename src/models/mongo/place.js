@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 const { Schema } = Mongoose;
 
-const trackSchema = new Schema({
+const placeSchema = new Schema({
   title: String,
   artist: String,
   duration: Number,
@@ -12,4 +12,4 @@ const trackSchema = new Schema({
   },
 });
 
-export const Track = Mongoose.model("Track", trackSchema);
+export const Place = Mongoose.model("Place", placeSchema);

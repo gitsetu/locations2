@@ -2,7 +2,7 @@ import { aboutController } from "./controllers/about-controller.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { collectionController } from "./controllers/collection-controller.js";
-import { trackController } from "./controllers/track-controller.js";
+import { placeController } from "./controllers/place-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -19,11 +19,11 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard/deletecollection/{id}", config: dashboardController.deleteCollection },
 
   { method: "GET", path: "/collection/{id}", config: collectionController.index },
-  { method: "POST", path: "/collection/{id}/addtrack", config: collectionController.addTrack },
-  { method: "GET", path: "/collection/{id}/deletetrack/{trackid}", config: collectionController.deleteTrack },
+  { method: "POST", path: "/collection/{id}/addplace", config: collectionController.addPlace },
+  { method: "GET", path: "/collection/{id}/deleteplace/{placeid}", config: collectionController.deletePlace },
 
-  { method: "GET", path: "/track/{id}/edittrack/{trackid}", config: trackController.index },
-  { method: "POST", path: "/track/{id}/updatetrack/{trackid}", config: trackController.update },
+  { method: "GET", path: "/place/{id}/editplace/{placeid}", config: placeController.index },
+  { method: "POST", path: "/place/{id}/updateplace/{placeid}", config: placeController.update },
 
   { method: "POST", path: "/collection/{id}/uploadimage", config: collectionController.uploadImage },
 
