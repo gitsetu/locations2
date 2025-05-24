@@ -7,18 +7,18 @@ export const trackJsonStore = {
     return db.data.tracks;
   },
 
-  async addTrack(playlistId, track) {
+  async addTrack(collectionId, track) {
     await db.read();
     track._id = v4();
-    track.playlistid = playlistId;
+    track.collectionid = collectionId;
     db.data.tracks.push(track);
     await db.write();
     return track;
   },
 
-  async getTracksByPlaylistId(id) {
+  async getTracksByCollectionId(id) {
     await db.read();
-    let t = db.data.tracks.filter((track) => track.playlistid === id);
+    let t = db.data.tracks.filter((track) => track.collectionid === id);
     if (t === undefined) t = null;
     return t;
   },

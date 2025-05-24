@@ -31,7 +31,7 @@
 
 ## version 0.7.0
 
-- introduce Playlist test interface
+- introduce Collection test interface
 - refactor tests to use skeleton
 - incorporate nodemon to launch dev server
 

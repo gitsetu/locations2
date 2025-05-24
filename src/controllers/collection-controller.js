@@ -2,15 +2,15 @@ import { TrackSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
-export const playlistController = {
+export const collectionController = {
   index: {
     handler: async function (request, h) {
-      const playlist = await db.playlistStore.getPlaylistById(request.params.id);
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
       const viewData = {
-        title: "Playlist",
-        playlist: playlist,
+        title: "Collection",
+        collection: collection,
       };
-      return h.view("playlist-view", viewData);
+      return h.view("collection-view", viewData);
     },
   },
 
@@ -19,43 +19,43 @@ export const playlistController = {
       payload: TrackSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("playlist-view", { title: "Add track error", errors: error.details }).takeover().code(400);
+        return h.view("collection-view", { title: "Add track error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
-      const playlist = await db.playlistStore.getPlaylistById(request.params.id);
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newTrack = {
         title: request.payload.title,
         artist: request.payload.artist,
         duration: Number(request.payload.duration),
       };
-      await db.trackStore.addTrack(playlist._id, newTrack);
-      return h.redirect(`/playlist/${playlist._id}`);
+      await db.trackStore.addTrack(collection._id, newTrack);
+      return h.redirect(`/collection/${collection._id}`);
     },
   },
 
   deleteTrack: {
     handler: async function (request, h) {
-      const playlist = await db.playlistStore.getPlaylistById(request.params.id);
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
       await db.trackStore.deleteTrack(request.params.trackid);
-      return h.redirect(`/playlist/${playlist._id}`);
+      return h.redirect(`/collection/${collection._id}`);
     },
   },
 
   uploadImage: {
     handler: async function (request, h) {
       try {
-        const playlist = await db.playlistStore.getPlaylistById(request.params.id);
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
         const file = request.payload.imagefile;
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
-          playlist.img = url;
-          await db.playlistStore.updatePlaylist(playlist);
+          collection.img = url;
+          await db.collectionStore.updateCollection(collection);
         }
-        return h.redirect(`/playlist/${playlist._id}`);
+        return h.redirect(`/collection/${collection._id}`);
       } catch (err) {
         console.log(err);
-        return h.redirect(`/playlist/${playlist._id}`);
+        return h.redirect(`/collection/${collection._id}`);
       }
     },
     payload: {

@@ -7,15 +7,15 @@ export const trackMemStore = {
     return tracks;
   },
 
-  async addTrack(playlistId, track) {
+  async addTrack(collectionId, track) {
     track._id = v4();
-    track.playlistid = playlistId;
+    track.collectionid = collectionId;
     tracks.push(track);
     return track;
   },
 
-  async getTracksByPlaylistId(id) {
-    return tracks.filter((track) => track.playlistid === id);
+  async getTracksByCollectionId(id) {
+    return tracks.filter((track) => track.collectionid === id);
   },
 
   async getTrackById(id) {
@@ -26,8 +26,8 @@ export const trackMemStore = {
     return foundTrack;
   },
 
-  async getPlaylistTracks(playlistId) {
-    let foundTracks = tracks.filter((track) => track.playlistid === playlistId);
+  async getCollectionTracks(collectionId) {
+    let foundTracks = tracks.filter((track) => track.collectionid === collectionId);
     if (!foundTracks) {
       foundTracks = null;
     }

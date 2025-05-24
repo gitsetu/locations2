@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each playlist.tracks}}
+    {{#each collection.tracks}}
       <tr>
         <td>
           {{title}}
@@ -21,12 +21,12 @@
           {{duration}}
         </td>
         <td>
-          <a href="/track/{{../playlist._id}}/edittrack/{{_id}}" class="ui icon button">
+          <a href="/track/{{../collection._id}}/edittrack/{{_id}}" class="ui icon button">
             <i class="fas fa-edit"></i>
           </a>
         </td>
         <td>
-          <a href="/playlist/{{../playlist._id}}/deletetrack/{{_id}}" class="ui icon button">
+          <a href="/collection/{{../collection._id}}/deletetrack/{{_id}}" class="ui icon button">
             <i class="fas fa-trash"></i>
           </a>
         </td>

@@ -47,7 +47,7 @@ export const beethoven = {
   title: "Mozart Favourites",
 };
 
-export const testPlaylists = [
+export const testCollections = [
   {
     title: "Beethoven Sonatas",
   },

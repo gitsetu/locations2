@@ -4,11 +4,11 @@ import { db } from "../models/db.js";
 export const trackController = {
   index: {
     handler: async function (request, h) {
-      const playlist = await db.playlistStore.getPlaylistById(request.params.id);
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
       const track = await db.trackStore.getTrackById(request.params.trackid);
       const viewData = {
         title: "Edit Song",
-        playlist: playlist,
+        collection: collection,
         track: track,
       };
       return h.view("track-view", viewData);
@@ -31,7 +31,7 @@ export const trackController = {
         duration: Number(request.payload.duration),
       };
       await db.trackStore.updateTrack(track, newTrack);
-      return h.redirect(`/playlist/${request.params.id}`);
+      return h.redirect(`/collection/${request.params.id}`);
     },
   },
 };

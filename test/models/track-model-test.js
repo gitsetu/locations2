@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testPlaylists, testTracks, beethoven, mozart, concerto, testUsers } from "../fixtures.js";
+import { testCollections, testTracks, beethoven, mozart, concerto, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Track Model tests", () => {
@@ -9,9 +9,9 @@ suite("Track Model tests", () => {
 
   setup(async () => {
     db.init("mongo");
-    await db.playlistStore.deleteAllPlaylists();
+    await db.collectionStore.deleteAllCollections();
     await db.trackStore.deleteAllTracks();
-    beethovenList = await db.playlistStore.addPlaylist(beethoven);
+    beethovenList = await db.collectionStore.addCollection(beethoven);
     for (let i = 0; i < testTracks.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       testTracks[i] = await db.trackStore.addTrack(beethovenList._id, testTracks[i]);
@@ -19,14 +19,14 @@ suite("Track Model tests", () => {
   });
 
   test("create single track", async () => {
-    const mozartList = await db.playlistStore.addPlaylist(mozart);
+    const mozartList = await db.collectionStore.addCollection(mozart);
     const track = await db.trackStore.addTrack(mozartList._id, concerto)
     assert.isNotNull(track._id);
     assertSubset (concerto, track);
   });
 
   test("create multiple trackApi", async () => {
-    const tracks = await db.playlistStore.getPlaylistById(beethovenList._id);
+    const tracks = await db.collectionStore.getCollectionById(beethovenList._id);
     assert.equal(testTracks.length, testTracks.length)
   });
 
@@ -39,7 +39,7 @@ suite("Track Model tests", () => {
   });
 
   test("get a track - success", async () => {
-    const mozartList = await db.playlistStore.addPlaylist(mozart);
+    const mozartList = await db.collectionStore.addCollection(mozart);
     const track = await db.trackStore.addTrack(mozartList._id, concerto)
     const newTrack = await db.trackStore.getTrackById(track._id);
     assertSubset (concerto, newTrack);
@@ -49,12 +49,12 @@ suite("Track Model tests", () => {
     const id = testTracks[0]._id;
     await db.trackStore.deleteTrack(id);
     const tracks = await db.trackStore.getAllTracks();
-    assert.equal(tracks.length, testPlaylists.length - 1);
+    assert.equal(tracks.length, testCollections.length - 1);
     const deletedTrack = await db.trackStore.getTrackById(id);
     assert.isNull(deletedTrack);
   });
 
-  test("get a playlist - bad params", async () => {
+  test("get a collection - bad params", async () => {
     assert.isNull(await db.trackStore.getTrackById(""));
     assert.isNull(await db.trackStore.getTrackById());
   });
@@ -62,6 +62,6 @@ suite("Track Model tests", () => {
   test("delete One User - fail", async () => {
     await db.trackStore.deleteTrack("bad-id");
     const tracks = await db.trackStore.getAllTracks();
-    assert.equal(tracks.length, testPlaylists.length);
+    assert.equal(tracks.length, testCollections.length);
   });
 });

@@ -28,28 +28,28 @@ export const appService = {
     return res.data;
   },
 
-  async createPlaylist(playlist) {
-    const res = await axios.post(`${this.appUrl}/api/playlists`, playlist);
+  async createCollection(collection) {
+    const res = await axios.post(`${this.appUrl}/api/collections`, collection);
     return res.data;
   },
 
-  async deleteAllPlaylists() {
-    const response = await axios.delete(`${this.appUrl}/api/playlists`);
+  async deleteAllCollections() {
+    const response = await axios.delete(`${this.appUrl}/api/collections`);
     return response.data;
   },
 
-  async deletePlaylist(id) {
-    const response = await axios.delete(`${this.appUrl}/api/playlists/${id}`);
+  async deleteCollection(id) {
+    const response = await axios.delete(`${this.appUrl}/api/collections/${id}`);
     return response;
   },
 
-  async getAllPlaylists() {
-    const res = await axios.get(`${this.appUrl}/api/playlists`);
+  async getAllCollections() {
+    const res = await axios.get(`${this.appUrl}/api/collections`);
     return res.data;
   },
 
-  async getPlaylist(id) {
-    const res = await axios.get(`${this.appUrl}/api/playlists/${id}`);
+  async getCollection(id) {
+    const res = await axios.get(`${this.appUrl}/api/collections/${id}`);
     return res.data;
   },
 
@@ -59,7 +59,7 @@ export const appService = {
   },
 
   async createTrack(id, track) {
-    const res = await axios.post(`${this.appUrl}/api/playlists/${id}/tracks`, track);
+    const res = await axios.post(`${this.appUrl}/api/collections/${id}/tracks`, track);
     return res.data;
   },
 

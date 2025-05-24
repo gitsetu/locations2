@@ -1,43 +1,43 @@
-import { PlaylistSpec } from "../models/joi-schemas.js";
+import { CollectionSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const playlists = await db.playlistStore.getUserPlaylists(loggedInUser._id);
+      const collections = await db.collectionStore.getUserCollections(loggedInUser._id);
       const viewData = {
         title: "App Dashboard",
         user: loggedInUser,
-        playlists: playlists,
+        collections: collections,
       };
       return h.view("dashboard-view", viewData);
     },
   },
 
-  addPlaylist: {
+  addCollection: {
     validate: {
-      payload: PlaylistSpec,
+      payload: CollectionSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("dashboard-view", { title: "Add Playlist error", errors: error.details }).takeover().code(400);
+        return h.view("dashboard-view", { title: "Add Collection error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const newPlayList = {
+      const newCollection = {
         userid: loggedInUser._id,
         title: request.payload.title,
       };
-      await db.playlistStore.addPlaylist(newPlayList);
+      await db.collectionStore.addCollection(newCollection);
       return h.redirect("/dashboard");
     },
   },
 
-  deletePlaylist: {
+  deleteCollection: {
     handler: async function (request, h) {
-      const playlist = await db.playlistStore.getPlaylistById(request.params.id);
-      await db.playlistStore.deletePlaylistById(playlist._id);
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
+      await db.collectionStore.deleteCollectionById(collection._id);
       return h.redirect("/dashboard");
     },
   },

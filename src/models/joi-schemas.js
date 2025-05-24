@@ -26,7 +26,7 @@ export const TrackSpec = Joi.object()
     title: Joi.string().required().example("Piano Sonata No. 7"),
     artist: Joi.string().required().example("Beethoven"),
     duration: Joi.number().allow("").optional().example(12),
-    playlistid: IdSpec,
+    collectionid: IdSpec,
   })
   .label("Track");
 
@@ -37,20 +37,20 @@ export const TrackSpecPlus = TrackSpec.keys({
 
 export const TrackArraySpec = Joi.array().items(TrackSpecPlus).label("TrackArray");
 
-export const PlaylistSpec = Joi.object()
+export const CollectionSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Beethoven Sonatas"),
     userid: IdSpec,
     tracks: TrackArraySpec,
   })
-  .label("Playlist");
+  .label("Collection");
 
-export const PlaylistSpecPlus = PlaylistSpec.keys({
+export const CollectionSpecPlus = CollectionSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-}).label("PlaylistPlus");
+}).label("CollectionPlus");
 
-export const PlaylistArraySpec = Joi.array().items(PlaylistSpecPlus).label("PlaylistArray");
+export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("CollectionArray");
 
 export const JwtAuth = Joi.object()
   .keys({
