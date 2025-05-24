@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { appService } from "./app-service.js";
-import { maggie, mozart, maggieCredentials, testCollections, testPlaces, concerto } from "../fixtures.js";
+import { maggie, park, maggieCredentials, testCollections, testPlaces, concerto } from "../fixtures.js";
 
 suite("Place API tests", () => {
   let user = null;
@@ -16,8 +16,8 @@ suite("Place API tests", () => {
     await appService.deleteAllUsers();
     user = await appService.createUser(maggie);
     await appService.authenticate(maggieCredentials);
-    mozart.userid = user._id;
-    beethovenSonatas = await appService.createCollection(mozart);
+    park.userid = user._id;
+    beethovenSonatas = await appService.createCollection(park);
   });
 
   teardown(async () => {});

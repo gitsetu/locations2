@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { assert } from "chai";
 import { appService } from "./app-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, maggieCredentials, mozart, testCollections } from "../fixtures.js";
+import { maggie, maggieCredentials, park, testCollections } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
 
@@ -17,19 +17,19 @@ suite("Collection API tests", () => {
     await appService.deleteAllUsers();
     user = await appService.createUser(maggie);
     await appService.authenticate(maggieCredentials);
-    mozart.userid = user._id;
+    park.userid = user._id;
   });
 
   teardown(async () => {});
 
   test("create collection", async () => {
-    const returnedCollection = await appService.createCollection(mozart);
+    const returnedCollection = await appService.createCollection(park);
     assert.isNotNull(returnedCollection);
-    assertSubset(mozart, returnedCollection);
+    assertSubset(park, returnedCollection);
   });
 
   test("delete a collection", async () => {
-    const collection = await appService.createCollection(mozart);
+    const collection = await appService.createCollection(park);
     const response = await appService.deleteCollection(collection._id);
     assert.equal(response.status, 204);
     try {

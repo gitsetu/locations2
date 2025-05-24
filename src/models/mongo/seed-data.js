@@ -22,8 +22,8 @@ export const seedData = {
   },
   collections: {
     _model: "Collection",
-    mozart: {
-      title: "Mozart Favourites",
+    park: {
+      title: "Park Favourites",
       userid: "->users.bart"
     }
   },
@@ -31,21 +31,21 @@ export const seedData = {
     _model : "Place",
     place_1 : {
       title: "Violin Concerto No. 1",
-      category: "Mozart",
+      category: "Park",
       latitude: 15,
-      collectionid: "->collections.mozart"
+      collectionid: "->collections.park"
     },
     place_2 : {
       title: "Violin Concerto No. 2",
-      category: "Mozart",
+      category: "Park",
       latitude: 11,
-      collectionid: "->collections.mozart"
+      collectionid: "->collections.park"
     },
     place_3 : {
       title: "Violin Concerto No. 3",
-      category: "Mozart",
+      category: "Park",
       latitude: 23,
-      collectionid: "->collections.mozart"
+      collectionid: "->collections.park"
     }
   }
 };

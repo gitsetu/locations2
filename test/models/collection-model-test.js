@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testCollections, mozart } from "../fixtures.js";
+import { testCollections, park } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Collection Model tests", () => {
@@ -15,8 +15,8 @@ suite("Collection Model tests", () => {
   });
 
   test("create a collection", async () => {
-    const collection = await db.collectionStore.addCollection(mozart);
-    assertSubset(mozart, collection);
+    const collection = await db.collectionStore.addCollection(park);
+    assertSubset(park, collection);
     assert.isDefined(collection._id);
   });
 
@@ -29,9 +29,9 @@ suite("Collection Model tests", () => {
   });
 
   test("get a collection - success", async () => {
-    const collection = await db.collectionStore.addCollection(mozart);
+    const collection = await db.collectionStore.addCollection(park);
     const returnedCollection = await db.collectionStore.getCollectionById(collection._id);
-    assertSubset(mozart, collection);
+    assertSubset(park, collection);
   });
 
   test("delete One Collection - success", async () => {

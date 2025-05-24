@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testCollections, testPlaces, beethoven, mozart, concerto, testUsers } from "../fixtures.js";
+import { testCollections, testPlaces, beethoven, park, concerto, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Place Model tests", () => {
@@ -19,8 +19,8 @@ suite("Place Model tests", () => {
   });
 
   test("create single place", async () => {
-    const mozartList = await db.collectionStore.addCollection(mozart);
-    const place = await db.placeStore.addPlace(mozartList._id, concerto)
+    const parkList = await db.collectionStore.addCollection(park);
+    const place = await db.placeStore.addPlace(parkList._id, concerto)
     assert.isNotNull(place._id);
     assertSubset (concerto, place);
   });
@@ -39,8 +39,8 @@ suite("Place Model tests", () => {
   });
 
   test("get a place - success", async () => {
-    const mozartList = await db.collectionStore.addCollection(mozart);
-    const place = await db.placeStore.addPlace(mozartList._id, concerto)
+    const parkList = await db.collectionStore.addCollection(park);
+    const place = await db.placeStore.addPlace(parkList._id, concerto)
     const newPlace = await db.placeStore.getPlaceById(place._id);
     assertSubset (concerto, newPlace);
   });

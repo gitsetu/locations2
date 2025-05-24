@@ -33,18 +33,18 @@ export const testUsers = [
   },
 ];
 
-export const mozart = {
-  title: "Mozart Favourites",
+export const park = {
+  title: "Park Favourites",
 };
 
 export const concerto = {
   title: "Violin Concerto No. 3",
-  category: "Mozart",
+  category: "Park",
   latitude: 15,
 };
 
 export const beethoven = {
-  title: "Mozart Favourites",
+  title: "Park Favourites",
 };
 
 export const testCollections = [
