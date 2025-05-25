@@ -45,9 +45,29 @@ export const collectionController = {
 
   uploadImage: {
     handler: async function (request, h) {
+
+      // delete existing image on database and cloudinary
+      try {
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
+        const file = collection.img;
+        // console.log("file", file);
+        if (Object.keys(file).length > 0) {
+          // delete image on cloudinary
+          await imageStore.deleteImage(file);
+          // delete img path
+          collection.img = "";
+          // update img path
+          await db.collectionStore.updateCollection(collection);
+        }
+      } catch (err) {
+        // console.log("error deleting image");
+      }
+
+      // upload new image
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         const file = request.payload.imagefile;
+        // check image file path exist
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
           collection.img = url;
