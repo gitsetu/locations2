@@ -39,6 +39,10 @@ export const placeMongoStore = {
     await Place.deleteMany({});
   },
 
+  async deleteAllPlacesFromCollection(id) {
+    await Place.deleteMany({ collectionid: id });
+  },
+
   async updatePlace(place, updatedPlace) {
     console.log(updatedPlace);
 

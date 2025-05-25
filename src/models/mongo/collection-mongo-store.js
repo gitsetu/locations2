@@ -32,16 +32,25 @@ export const collectionMongoStore = {
 
   async deleteCollectionById(id) {
     try {
-      // delete associated image
-      try {
-        const collection = await this.getCollectionById(id)
-        console.log(collection.img);
-        await imageStore.deleteImage(collection.img);
-      } catch (error) {
-        console.log("associated image not deleted");
-      }
-      await Collection.deleteOne({ _id: id });
+      // TODO - DONE: Cascade on Mongo DB
+      // Delete all places inside collection prior to deleting the list
+      await placeMongoStore.deleteAllPlacesFromCollection(id)
+    } catch (error) {
+      console.log("places in collection not deleted");
+    }
 
+    // TODO - DONE: delete associated image
+    try {
+      const collection = await this.getCollectionById(id)
+      // console.log(collection.img);
+      await imageStore.deleteImage(collection.img);
+    } catch (error) {
+      // console.log("associated image not deleted");
+    }
+
+    // finally delete collection
+    try {
+      await Collection.deleteOne({ _id: id });
     } catch (error) {
       console.log("bad id");
     }
