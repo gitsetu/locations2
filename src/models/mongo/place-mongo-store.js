@@ -40,9 +40,14 @@ export const placeMongoStore = {
   },
 
   async updatePlace(place, updatedPlace) {
+    console.log(updatedPlace);
+
     place.title = updatedPlace.title;
     place.category = updatedPlace.category;
     place.latitude = updatedPlace.latitude;
+    place.longitude = updatedPlace.longitude;
+
+    console.log(place);
     await place.save();
   },
 };

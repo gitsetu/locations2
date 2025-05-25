@@ -26,6 +26,7 @@ export const webRoutes = [
   { method: "POST", path: "/place/{id}/updateplace/{placeid}", config: placeController.update },
 
   { method: "POST", path: "/collection/{id}/uploadimage", config: collectionController.uploadImage },
+  { method: "POST", path: "/collection/{id}/deleteimage", config: collectionController.deleteImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 ];

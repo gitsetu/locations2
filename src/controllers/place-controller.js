@@ -7,7 +7,7 @@ export const placeController = {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const place = await db.placeStore.getPlaceById(request.params.placeid);
       const viewData = {
-        title: "Edit Song",
+        title: "Edit Place",
         collection: collection,
         place: place,
       };
@@ -25,10 +25,13 @@ export const placeController = {
     },
     handler: async function (request, h) {
       const place = await db.placeStore.getPlaceById(request.params.placeid);
+      console.log(place);
+
       const newPlace = {
         title: request.payload.title,
         category: request.payload.category,
         latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
       };
       await db.placeStore.updatePlace(place, newPlace);
       return h.redirect(`/collection/${request.params.id}`);

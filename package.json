@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wit-hdip-comp-sci-2021/playtime.git"
+    "url": "git+https://github.com/gitsetu/location.git"
   },
   "keywords": [
     "node",
     "hapi"
   ],
-  "author": "edeleastar",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gitsetu/location/issues"

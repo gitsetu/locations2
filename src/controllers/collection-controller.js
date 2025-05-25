@@ -28,6 +28,7 @@ export const collectionController = {
         title: request.payload.title,
         category: request.payload.category,
         latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
       };
       await db.placeStore.addPlace(collection._id, newPlace);
       return h.redirect(`/collection/${collection._id}`);
@@ -55,6 +56,34 @@ export const collectionController = {
         return h.redirect(`/collection/${collection._id}`);
       } catch (err) {
         console.log(err);
+        return h.redirect(`/collection/${collection._id}`);
+      }
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true,
+    },
+  },
+
+  deleteImage: {
+    handler: async function (request, h) {
+      try {
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
+        const file = collection.img;
+        console.log("file", file);
+        if (Object.keys(file).length > 0) {
+          // delete image on cloudinary
+          await imageStore.deleteImage(file);
+          // delete img path
+          collection.img = "";
+          // update img path
+          await db.collectionStore.updateCollection(collection);
+        }
+        return h.redirect(`/collection/${collection._id}`);
+      } catch (err) {
+        console.log("error deleting image");
         return h.redirect(`/collection/${collection._id}`);
       }
     },
