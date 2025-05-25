@@ -23,9 +23,10 @@ export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 
 export const PlaceSpec = Joi.object()
   .keys({
-    title: Joi.string().required().example("Piano Sonata No. 7"),
+    title: Joi.string().required().example("Cafe Station"),
     category: Joi.string().required().example("Cafe"),
     latitude: Joi.number().allow("").optional().example(12),
+    longitude: Joi.number().allow("").optional().example(12),
     collectionid: IdSpec,
   })
   .label("Place");

@@ -41,6 +41,7 @@ export const forest = {
   title: "The Raven Forest",
   category: "Park",
   latitude: 15,
+  longitude: 10,
 };
 
 export const cafe = {
@@ -64,15 +65,18 @@ export const testPlaces = [
     title: "Cafe Main Street 3",
     category: "Cafe",
     latitude: 5,
+    longitude: 14,
   },
   {
     title: "Cafe Train Station",
     category: "Cafe",
     latitude: 6,
+    longitude: 12,
   },
   {
     title: "Bookshop Cafe",
     category: "Cafe",
     latitude: 4,
+    longitude: 19,
   },
 ];

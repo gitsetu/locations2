@@ -33,18 +33,21 @@ export const seedData = {
       title: "Forest 1",
       category: "Park",
       latitude: 15,
+      longitude: 10,
       collectionid: "->collections.park"
     },
     place_2 : {
       title: "Forest 2",
       category: "Park",
       latitude: 11,
+      longitude: 11,
       collectionid: "->collections.park"
     },
     place_3 : {
       title: "Forest 3",
       category: "Park",
       latitude: 23,
+      longitude: 12,
       collectionid: "->collections.park"
     }
   }
