@@ -7,7 +7,7 @@
   <div class="card-content">
     <form action="/collection/{{collection._id}}/uploadimage" method="POST" enctype="multipart/form-data">
       <div id="file-select" class="file has-name is-fullwidth">
-        <label class="file-label"> <input class="file-input" name="imagefile" type="file" name="resume"
+        <label class="file-label mr-3"> <input class="file-input" name="imagefile" type="file" name="resume"
             accept="image/png, image/jpeg">
           <span class="file-cta">
             <span class="file-icon">
@@ -23,9 +23,12 @@
       </div>
     </form>
 
+
+    <hr>
+
     <form action="/collection/{{collection._id}}/deleteimage" method="POST" enctype="multipart/form-data">
-      <div id="file-select" class="file has-name is-fullwidth">
-        <button type="submit" class="button is-info"> <span class="file-icon">
+      <div id="" class="">
+        <button type="submit" class="button is-info has-background-danger"> <span class="file-icon">
               <i class="fas fa-trash-alt"></i>
             </span>Delete</button>
       </div>
