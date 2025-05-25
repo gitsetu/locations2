@@ -44,7 +44,7 @@ export const placeMongoStore = {
   },
 
   async updatePlace(place, updatedPlace) {
-    console.log(updatedPlace);
+    // console.log(updatedPlace);
     const placeDoc = await Place.findOne({ _id: place._id})
 
     placeDoc.title = updatedPlace.title;
@@ -52,7 +52,7 @@ export const placeMongoStore = {
     placeDoc.latitude = updatedPlace.latitude;
     placeDoc.longitude = updatedPlace.longitude;
 
-    console.log(placeDoc);
+    // console.log(placeDoc);
     await placeDoc.save();
   },
 };
