@@ -37,42 +37,42 @@ export const park = {
   title: "Park Favourites",
 };
 
-export const concerto = {
-  title: "Violin Concerto No. 3",
+export const forest = {
+  title: "The Raven Forest",
   category: "Park",
   latitude: 15,
 };
 
-export const beethoven = {
+export const cafe = {
   title: "Park Favourites",
 };
 
 export const testCollections = [
   {
-    title: "Beethoven Sonatas",
+    title: "Cafe Town",
   },
   {
-    title: "Beethoven Concertos",
+    title: "Cafe Forests",
   },
   {
-    title: "Beethoven Symphonies",
+    title: "Cafe Symphonies",
   },
 ];
 
 export const testPlaces = [
   {
-    title: "Piano Sonata No. 3",
-    category: "Beethoven",
+    title: "Cafe Main Street 3",
+    category: "Cafe",
     latitude: 5,
   },
   {
-    title: "Piano Sonata No. 7",
-    category: "Beethoven",
+    title: "Cafe Train Station",
+    category: "Cafe",
     latitude: 6,
   },
   {
-    title: "Piano Sonata No. 10",
-    category: "Beethoven",
+    title: "Bookshop Cafe",
+    category: "Cafe",
     latitude: 4,
   },
 ];

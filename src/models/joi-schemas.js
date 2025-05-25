@@ -24,7 +24,7 @@ export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 export const PlaceSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Piano Sonata No. 7"),
-    category: Joi.string().required().example("Beethoven"),
+    category: Joi.string().required().example("Cafe"),
     latitude: Joi.number().allow("").optional().example(12),
     collectionid: IdSpec,
   })
@@ -39,7 +39,7 @@ export const PlaceArraySpec = Joi.array().items(PlaceSpecPlus).label("PlaceArray
 
 export const CollectionSpec = Joi.object()
   .keys({
-    title: Joi.string().required().example("Beethoven Sonatas"),
+    title: Joi.string().required().example("Cafe Town"),
     userid: IdSpec,
     places: PlaceArraySpec,
   })

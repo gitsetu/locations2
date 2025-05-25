@@ -1,32 +1,32 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testCollections, testPlaces, beethoven, park, concerto, testUsers } from "../fixtures.js";
+import { testCollections, testPlaces, cafe, park, forest, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Place Model tests", () => {
 
-  let beethovenList = null;
+  let cafeList = null;
 
   setup(async () => {
     db.init("mongo");
     await db.collectionStore.deleteAllCollections();
     await db.placeStore.deleteAllPlaces();
-    beethovenList = await db.collectionStore.addCollection(beethoven);
+    cafeList = await db.collectionStore.addCollection(cafe);
     for (let i = 0; i < testPlaces.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testPlaces[i] = await db.placeStore.addPlace(beethovenList._id, testPlaces[i]);
+      testPlaces[i] = await db.placeStore.addPlace(cafeList._id, testPlaces[i]);
     }
   });
 
   test("create single place", async () => {
     const parkList = await db.collectionStore.addCollection(park);
-    const place = await db.placeStore.addPlace(parkList._id, concerto)
+    const place = await db.placeStore.addPlace(parkList._id, forest)
     assert.isNotNull(place._id);
-    assertSubset (concerto, place);
+    assertSubset (forest, place);
   });
 
   test("create multiple placeApi", async () => {
-    const places = await db.collectionStore.getCollectionById(beethovenList._id);
+    const places = await db.collectionStore.getCollectionById(cafeList._id);
     assert.equal(testPlaces.length, testPlaces.length)
   });
 
@@ -40,9 +40,9 @@ suite("Place Model tests", () => {
 
   test("get a place - success", async () => {
     const parkList = await db.collectionStore.addCollection(park);
-    const place = await db.placeStore.addPlace(parkList._id, concerto)
+    const place = await db.placeStore.addPlace(parkList._id, forest)
     const newPlace = await db.placeStore.getPlaceById(place._id);
-    assertSubset (concerto, newPlace);
+    assertSubset (forest, newPlace);
   });
 
   test("delete One Place - success", async () => {
