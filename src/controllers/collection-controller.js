@@ -72,7 +72,7 @@ export const collectionController = {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         const file = collection.img;
-        console.log("file", file);
+        // console.log("file", file);
         if (Object.keys(file).length > 0) {
           // delete image on cloudinary
           await imageStore.deleteImage(file);

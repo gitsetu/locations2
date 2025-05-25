@@ -25,14 +25,12 @@ export const imageStore = {
 
   deleteImage: async function (img) {
     // Extract image id, AI helped with the split syntax
-    // let publicId = img.substring(0, img.lastIndexOf("."));
-    // publicId = publicId.replace(/^http:\/\//, "");
     const publicId = img.split("/").pop().split(".")[0];
     console.log("public ID:" , publicId);
 
     const response = await cloudinary.v2.uploader.destroy(publicId, {});
-    console.log("Deleting:" , img);
+    console.log("Deleting image:" , img);
 
-    console.log("Image:" , response);
+    console.log("Cloudinary:" , response);
   },
 };

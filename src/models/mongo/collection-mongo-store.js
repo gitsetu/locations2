@@ -1,5 +1,6 @@
 import { Collection } from "./collection.js";
 import { placeMongoStore } from "./place-mongo-store.js";
+import {imageStore} from "../image-store.js";
 
 export const collectionMongoStore = {
   async getAllCollections() {
@@ -31,7 +32,16 @@ export const collectionMongoStore = {
 
   async deleteCollectionById(id) {
     try {
+      // delete associated image
+      try {
+        const collection = await this.getCollectionById(id)
+        console.log(collection.img);
+        await imageStore.deleteImage(collection.img);
+      } catch (error) {
+        console.log("associated image not deleted");
+      }
       await Collection.deleteOne({ _id: id });
+
     } catch (error) {
       console.log("bad id");
     }
