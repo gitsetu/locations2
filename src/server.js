@@ -5,7 +5,7 @@ import Cookie from "@hapi/cookie";
 import dotenv from "dotenv";
 import path from "path";
 import Joi from "joi";
-import jwt from "hapi-auth-jwt2";
+import * as jwt from "hapi-auth-jwt2";
 import HapiSwagger from "hapi-swagger";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
@@ -42,6 +42,8 @@ const swaggerOptions = {
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
+    // fixme : preparing for svelte
+    routes: { cors: true },
   });
 
   await server.register(Cookie);
