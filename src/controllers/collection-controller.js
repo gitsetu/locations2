@@ -6,12 +6,23 @@ export const collectionController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
+      let deleteButton = "disabled";
 
       const collection = await db.collectionStore.getCollectionById(request.params.id);
+      try {
+        const file = collection.img;
+        if (file.length > 0) {
+          deleteButton = ""
+        }
+      } catch (err) {
+        console.log("no image, delete image button disabled");
+      }
+
       const viewData = {
         title: "Collection",
         username: loggedInUser.firstName,
         collection: collection,
+        delete_button: deleteButton,
       };
       return h.view("collection-view", viewData);
     },
@@ -96,7 +107,7 @@ export const collectionController = {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         const file = collection.img;
         // console.log("file", file);
-        if (Object.keys(file).length > 0) {
+        if (file.length > 0) {
           // delete image on cloudinary
           await imageStore.deleteImage(file);
           // delete img path
@@ -106,7 +117,9 @@ export const collectionController = {
         }
         return h.redirect(`/collection/${collection._id}`);
       } catch (err) {
-        console.log("error deleting image");
+        // TODO DONE fix delete when there is no image
+        console.log("no image");
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
         return h.redirect(`/collection/${collection._id}`);
       }
     },

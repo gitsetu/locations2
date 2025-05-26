@@ -12,11 +12,10 @@ export const aboutController = {
       const numPlaces = allPlaces.length;
 
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
-      const getAllPlaces = await db.placeStore.getAllPlaces();
-
-      // Count unique names
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+      // Count unique categories, AI used to get the arrow function right
       const countUniqueNames = (arr) => new Set(arr.map(obj => obj.category.toLowerCase())).size;
-      const uniqueNameCount = countUniqueNames(getAllPlaces);
+      const uniqueNameCount = countUniqueNames(allPlaces);
 
       const allCollections = await db.collectionStore.getAllCollections();
       const numCollections = allCollections.length;
