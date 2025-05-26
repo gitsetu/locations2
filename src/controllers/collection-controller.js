@@ -5,9 +5,12 @@ import { imageStore } from "../models/image-store.js";
 export const collectionController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const viewData = {
         title: "Collection",
+        username: loggedInUser.firstName,
         collection: collection,
       };
       return h.view("collection-view", viewData);

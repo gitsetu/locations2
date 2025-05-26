@@ -9,6 +9,7 @@ export const dashboardController = {
       const viewData = {
         title: "App Dashboard",
         user: loggedInUser,
+        username: loggedInUser.firstName,
         collections: collections,
       };
       return h.view("dashboard-view", viewData);

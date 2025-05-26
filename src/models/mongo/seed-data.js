@@ -45,7 +45,7 @@ export const seedData = {
     },
     place_3 : {
       title: "Forest 3",
-      category: "Park",
+      category: "Lake",
       latitude: 23,
       longitude: 12,
       collectionid: "->collections.park"
