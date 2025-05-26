@@ -6,6 +6,8 @@ export const collectionController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
+
+      // https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/disabled
       let deleteButton = "disabled";
 
       const collection = await db.collectionStore.getCollectionById(request.params.id);
