@@ -41,7 +41,7 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 4000,
     // fixme : preparing for svelte
     routes: { cors: true },
   });
@@ -97,7 +97,8 @@ async function init() {
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
-  process.exit(1);
+  // comment next line for deployment on render
+  // process.exit(1);
 });
 
 init();
