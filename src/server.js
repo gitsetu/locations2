@@ -22,7 +22,7 @@ const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
   // comment next line for deployment on render
-  // process.exit(1);
+  process.exit(1);
 }
 
 const swaggerOptions = {
@@ -42,7 +42,7 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: process.env.PORT || 4000,
+    port: process.env.PORT || 3000,
     // fixme : preparing for svelte
     routes: { cors: true },
   });
