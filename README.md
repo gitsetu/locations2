@@ -5,7 +5,7 @@ Web app to make lists (collections) of places.
 
 ---
 
-Author: Pedro Royo  
+Author: ***** 
 SETU HDip Full Stack 1  
 May 2025
 
